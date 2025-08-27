@@ -1,38 +1,186 @@
-.App {
-  text-align: center;
+/* Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  background: linear-gradient(135deg, #bf6eb8, #fad0c4, #aa137f);
+  background-size: 300% 300%;
+  animation: gradientShift 10s ease infinite;
+  font-family: "Poppins", sans-serif;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+/* Gradient Animation */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.birthday-card {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
 }
 
-.App-link {
-  color: #61dafb;
+.card {
+  position: relative;
+  width: 420px;
+  height: 520px;
+  transform-style: preserve-3d;
+  transform: perspective(2500px) rotateY(0deg) rotateX(0deg);
+  transition: transform 1s ease;
+  cursor: pointer;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.card:hover {
+  transform: perspective(2500px) rotateY(15deg) rotateX(3deg) scale(1.05);
+}
+
+.card-front {
+  position: absolute;
+  background: linear-gradient(135deg, #ffe0e0, #ffcdd2);
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  transform-origin: left;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+  transition: transform 0.8s ease;
+  z-index: 2;
+  backface-visibility: hidden;
+  border-radius: 20px;
+}
+
+.card:hover .card-front {
+  transform: rotateY(-160deg);
+}
+
+.happy {
+  font-family: "Brush Script MT", cursive;
+  text-align: center;
+  margin: 30px;
+  font-size: 3.2rem;
+  color: #b71c1c;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.balloons {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.balloon {
+  position: absolute;
+  width: 85px;
+  height: 95px;
+  border-radius: 50%;
+  animation: float 5s ease-in-out infinite;
+}
+
+.balloon-1 {
+  background: radial-gradient(circle, #ff4081, #c2185b);
+  left: 40px;
+  top: 180px;
+  animation-delay: 0s;
+}
+
+.balloon-2 {
+  background: radial-gradient(circle, #4caf50, #2e7d32);
+  left: 150px;
+  top: 140px;
+  animation-delay: 1s;
+}
+
+.balloon-3 {
+  background: radial-gradient(circle, #2196f3, #0d47a1);
+  left: 260px;
+  top: 180px;
+  animation-delay: 2s;
+}
+
+.balloon-4 {
+  background: radial-gradient(circle, #ffeb3b, #fbc02d);
+  left: 340px;
+  top: 140px;
+  animation-delay: 3s;
+}
+
+.balloon:before {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 100px;
+  background-color: #795548;
+  top: 95px;
+  left: 42px;
+}
+
+.balloon:after {
+  content: "▲";
+  position: absolute;
+  color: inherit;
+  top: 90px;
+  left: 35px;
+  font-size: 1.5rem;
+}
+
+/* Floating Animation */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
   }
-  to {
-    transform: rotate(360deg);
+  50% {
+    transform: translateY(-40px) rotate(3deg);
   }
+}
+
+/* Inside Card */
+.card-inside {
+  position: absolute;
+  background: #fff;
+  width: 100%;
+  height: 100%;
+  padding: 30px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+  z-index: 1;
+  border-radius: 20px;
+}
+
+.wish {
+  color: #d32f2f;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.message {
+  color: #333;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  text-align: justify;
+  font-family: cursive;
+}
+
+.signature {
+  margin-top: 30px;
+  font-style: italic;
+  font-weight: bold;
+  color: #b71c1c;
+}
+
+/* Confetti Effect */
+.confetti {
+  display: none;
 }
